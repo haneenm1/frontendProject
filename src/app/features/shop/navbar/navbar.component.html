@@ -1,0 +1,34 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+
+<nav class="navbar">
+  <div class="search">
+    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+    <input type="search" placeholder="Search...">
+  </div>
+
+  <div class="logo">
+    <a class="logo-link">
+      <img class="logo-img" src="assets/icons/store-icon.png">
+      <span class="shop-name">StyleNest</span>
+    </a>
+  </div>
+
+  <div class="info">
+    <a class="cart-icon" (click)="goToCart()">
+      <i class="fa-solid fa-cart-shopping"></i>
+    </a>    
+    <a class="wishlist-icon" (click)="goTowishlist()">
+      <i class="fa-regular fa-heart"></i>
+    </a>
+    <a class="sidebar-icon"(click)="sidebar.open()">
+      <i class="fa-solid fa-bars"></i>
+    </a>
+  </div>
+</nav>
+
+<sidebar #sidebar></sidebar>
+
+

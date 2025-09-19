@@ -1,0 +1,94 @@
+<div class="admin-container">
+    <h2>Manage Products</h2>
+  
+  
+    <div class="controls">
+       <input 
+        type="text" 
+        placeholder="Search by name..." 
+        [(ngModel)]="searchTerm"
+      />
+  
+     
+      <select [(ngModel)]="filterCategory">
+        <option value="">All Categories</option>
+        <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+      </select>
+  
+    
+      <select [(ngModel)]="filterStatus">
+        <option value="">All Status</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+  
+      <button class="add-btn" (click)="addProduct()">+ Add Product</button>
+      <button class="manage-btn" (click)="openCategoryModal()">Manage Categories</button>
+      <button class="manage-btn" (click)="openBrandModal()">Manage Brands</button>
+    </div>
+ 
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr *ngFor="let product of filteredProducts()">
+          <td>
+            <img [src]="product.image" alt="{{ product.name }}" class="product-thumb" />
+          </td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.category }}</td>
+          <td>
+            <span *ngIf="product.discountedPrice" class="new-price">${{ product.discountedPrice }}</span>
+            <span *ngIf="product.discountedPrice" class="old-price">${{ product.price }}</span>
+            <span *ngIf="!product.discountedPrice">${{ product.price }}</span>
+          </td>
+          <td>{{ product.stock }}</td>
+          <td>
+            <span [class.active]="product.status === 'active'" [class.inactive]="product.status === 'inactive'">
+              {{ product.status | titlecase }}
+            </span>
+          </td>
+          <td class="actions">
+            <button (click)="editProduct(product)">Edit</button>
+            <button (click)="deleteProduct(product)" class="delete">Delete</button>
+            <button (click)="viewProduct(product)" class="view">View</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- مودال -->
+    <app-product-modal 
+      *ngIf="selectedProduct" 
+      [product]="selectedProduct" 
+      (close)="closeModal()">
+    </app-product-modal>
+  </div>
+  
+
+
+  <category-modal 
+  *ngIf="categoryModalOpen" 
+  [categories]="categories" 
+  (categoriesChange)="categories = $event"
+  (close)="closeCategoryModal()">
+</category-modal>
+
+<brand-modal 
+  *ngIf="brandModalOpen" 
+  [brands]="brands" 
+  (brandsChange)="brands = $event"
+  (close)="closeBrandModal()">
+</brand-modal>
+
+

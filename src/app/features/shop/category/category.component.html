@@ -1,0 +1,22 @@
+<div class="category-wrapper" #categoryContainer>
+
+  <div class="category-list">
+    <ng-container *ngFor="let category of visibleCategories">
+      <button class="category-btn">{{ category }}</button>
+    </ng-container>
+
+
+    <button class="category-btn more-btn" *ngIf="hiddenCategories.length > 0"
+            (click)="toggleDropdown()">
+      ...
+    </button>
+  </div>
+
+  <div class="dropdown-overlay" *ngIf="showDropdown">
+    <div class="dropdown-list">
+      <ng-container *ngFor="let category of hiddenCategories">
+        <button class="category-btn">{{ category }}</button>
+      </ng-container>
+    </div>
+  </div>
+</div>

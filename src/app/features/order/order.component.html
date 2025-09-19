@@ -1,0 +1,24 @@
+<navbar></navbar>
+
+<div class="order-history">
+  <h2>Order History</h2>
+
+  <div *ngIf="orders.length > 0; else emptyHistory">
+    <div class="order-card" *ngFor="let order of orders">
+      <div class="order-header">
+        <p class="order-id">Order #{{ order.id }}</p>
+        <p class="order-date">{{ order.date | date:'mediumDate' }}</p>
+      </div>
+      <div class="order-body">
+        <p class="order-status">Status: <span [class]="order.status | lowercase">{{ order.status }}</span></p>
+        <p class="order-items">Items: {{ order.items.length }}</p>
+        <p class="order-total">Total: ${{ order.total.toFixed(2) }}</p>
+      </div>
+      <button class="details-btn" (click)="viewOrder(order)">View Details</button>
+    </div>
+  </div>
+
+  <ng-template #emptyHistory>
+    <p>No orders found.</p>
+  </ng-template>
+</div>

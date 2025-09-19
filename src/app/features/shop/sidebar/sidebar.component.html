@@ -1,0 +1,19 @@
+
+
+<div class="overlay" *ngIf="visible" (click)="close()"></div>
+
+
+<div class="sidebar" [class.show]="visible">
+  <div class="sidebar-header">
+    <img src="assets/icons/store-icon.png" class="logo-img" alt="Logo">
+    <button class="close-btn" (click)="close()">&times;</button>
+  </div>
+
+  <ul>
+    <li *ngFor="let item of menuItems">
+      <i [class]="item.icon"></i>
+      <span (click)="goTolink(item.route)">{{ item.label }}</span>
+    </li>    
+  </ul>
+</div>
+

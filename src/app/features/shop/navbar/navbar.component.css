@@ -1,0 +1,97 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+   
+  }
+  
+  .search input {
+    padding: 8px 10px 8px 35px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    outline: none;
+    width: 250px;
+    height: 35px;
+  }
+
+.search {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+ 
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .info {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .info a {
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+    transition: color 0.2s ease;
+  }
+  
+  .info a:hover {
+    color: #007bff;
+  }
+  
+  .logo-img {
+   width: 50px;
+   margin-bottom: 7px;
+  }
+  
+
+  .shop-name {
+    font-size: 20px;
+    color: #333;
+    margin: 0;
+    font-family: 'Kaushan Script', cursive;
+    font-weight: 500;
+    margin-left:-15px
+  }
+  
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.2s;
+  }
+  
+  .nav-link:hover {
+    opacity: 0.7;
+  }
+  
+
+  .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+  }
+  
