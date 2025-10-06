@@ -1,10 +1,11 @@
-<div class="category-wrapper" #categoryContainer>
 
+<div class="category-wrapper" #categoryContainer>
   <div class="category-list">
     <ng-container *ngFor="let category of visibleCategories">
-      <button class="category-btn">{{ category }}</button>
+      <button class="category-btn" (click)="selectCategory(category.id)">
+        {{ category.name }}
+      </button>
     </ng-container>
-
 
     <button class="category-btn more-btn" *ngIf="hiddenCategories.length > 0"
             (click)="toggleDropdown()">
@@ -15,7 +16,9 @@
   <div class="dropdown-overlay" *ngIf="showDropdown">
     <div class="dropdown-list">
       <ng-container *ngFor="let category of hiddenCategories">
-        <button class="category-btn">{{ category }}</button>
+        <button class="category-btn" (click)="selectCategory(category.id)">
+          {{ category.name }}
+        </button>
       </ng-container>
     </div>
   </div>

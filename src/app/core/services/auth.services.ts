@@ -16,12 +16,10 @@ interface RegisterRequest {
 }
 
 
-
 interface AuthResponse {
   token: string | null;
   message?: string;
 }
-
 
 
 @Injectable({
@@ -39,4 +37,18 @@ export class AuthService {
   register(data: RegisterRequest): Observable<any> {
     return this.http.post<any>(`${this.API_URL}/signup`, data);
   }
+
+  getUserIdFromToken(): number | null {
+    const token = localStorage.getItem('token'); 
+    if (!token) return null;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1])); 
+      return payload.userId || null; 
+    } catch (e) {
+      console.error('Invalid token', e);
+      return null;
+    }
+  }
 }
+

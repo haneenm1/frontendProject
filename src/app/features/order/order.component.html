@@ -1,24 +1,48 @@
+
 <navbar></navbar>
+<div *ngFor="let order of orders" class="order-card">
+  <h3>Order #{{ order.orderId }}</h3>
+  <p>Total: ${{ order.total }}</p>
+  <p>Status: {{ order.status }}</p>
+  <p>Payment Method: {{ order.paymentMethod }}</p>
+  <p>Date: {{ order.date | date:'medium' }}</p>
 
-<div class="order-history">
-  <h2>Order History</h2>
+  <button (click)="viewOrder(order)">
+    {{ order.showDetails ? 'Hide Details' : 'View Details' }}
+  </button>
 
-  <div *ngIf="orders.length > 0; else emptyHistory">
-    <div class="order-card" *ngFor="let order of orders">
-      <div class="order-header">
-        <p class="order-id">Order #{{ order.id }}</p>
-        <p class="order-date">{{ order.date | date:'mediumDate' }}</p>
+  <div *ngIf="order.showDetails" class="order-details">
+  
+   <!-- <h4>Items</h4>
+    <div *ngIf="order.orderItems.length > 0; else noItems">
+      <div *ngFor="let item of order.orderItems">
+        <p>{{ item.product?.name }} - Qty: {{ item.quantity }} - ${{ item.price }}</p>
       </div>
-      <div class="order-body">
-        <p class="order-status">Status: <span [class]="order.status | lowercase">{{ order.status }}</span></p>
-        <p class="order-items">Items: {{ order.items.length }}</p>
-        <p class="order-total">Total: ${{ order.total.toFixed(2) }}</p>
-      </div>
-      <button class="details-btn" (click)="viewOrder(order)">View Details</button>
     </div>
-  </div>
+    <ng-template #noItems><p>No items in this order</p></ng-template>
+    -->
+  
+    <h4>Shipping</h4>
+    <div *ngIf="order.shippings.length > 0; else noShipping">
+      <div *ngFor="let ship of order.shippings">  
+        <p>Country: {{ship.shippingAddress.country}}</p>
+        <p>City: {{ ship.shippingAddress.city }}</p>
+        <p>Method: {{ ship.method}}</p>
+        <p>Cost: {{ ship.cost }}</p>
+      </div>
+    </div>
+    <ng-template #noShipping><p>No shipping info</p></ng-template>
 
-  <ng-template #emptyHistory>
-    <p>No orders found.</p>
-  </ng-template>
+    
+    <h4>Transactions</h4>
+    <div *ngIf="order.transactions.length > 0; else noTransactions">
+      <div *ngFor="let t of order.transactions">
+        <p>Status: {{ t.payment_status }}</p>
+        <p>Method: {{ t.method }}</p>
+        <p>Amount: ${{ t.amount }}</p>
+        <p>Date: {{ t.payment_date | date:'medium' }}</p>
+      </div>
+    </div>
+    <ng-template #noTransactions><p>No transactions</p></ng-template>
+  </div>
 </div>

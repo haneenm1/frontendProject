@@ -1,22 +1,25 @@
 <navbar></navbar>
-<app-category></app-category>
+<app-category (categorySelected)="filterByCategory($event)"></app-category>
 
 <div class="product-grid">
   <div class="product-card" *ngFor="let product of products" (click)="openModal(product)">
-    <img [src]="product.image" alt="{{ product.name }}" class="product-image" />
-    <p class="product-name">{{ product.name }}</p> 
+    <img [src]="'assets/images/' + (product.images?.[0] || 'default.png')" alt="{{ product.name }}" class="product-image">
+    <p class="product-name">{{ product.name }}</p>
+
     <div class="product-info">
       <ng-container *ngIf="product.discountedPrice; else normalPrice">
         <p class="product-price">
-          <span class="new-price">${{ product.discountedPrice }}</span> 
-          <span class="old-price">${{ product.price }}</span>
+          <span class="new-price">${{ product.discountedPrice | number:'1.2-2' }}</span>
+          <span class="old-price">${{ product.price | number:'1.2-2' }}</span>
         </p>
       </ng-container>
+
       <ng-template #normalPrice>
-        <p class="product-price">${{ product.price }}</p>
+        <p class="product-price">${{ product.price | number:'1.2-2' }}</p>
       </ng-template>
-      <div class="cart-icon">
-        <i class="fa-solid fa-cart-plus"></i>
+
+      <div class="cart-icons">
+        <i class="fa-regular fa-heart" (click)="addToWishlist(product); $event.stopPropagation()"></i>
       </div>
     </div>
   </div>

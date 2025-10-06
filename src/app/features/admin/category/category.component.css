@@ -15,8 +15,8 @@
     background: #fff;
     padding: 25px 30px;
     border-radius: 12px;
-    width: 400px;
-    max-height: 80vh;
+    width: 750px;
+    max-height:100vh;
     overflow-y: auto;
     box-shadow: 0 8px 30px rgba(0,0,0,0.3);
     display: flex;
@@ -98,7 +98,7 @@
   
   .modal-content ul li button {
     padding: 4px 8px;
-    background-color: #e63946;
+    background-color: #5c3437;
     font-size: 12px;
   }
   

@@ -1,0 +1,98 @@
+.admin-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 40px 50px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #222;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+}
+
+.admin-table th, .admin-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: none;
+}
+
+.admin-table th {
+    background: #f5f5f5;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.admin-table tr {
+    background: #fafafa;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    transition: 0.3s;
+}
+
+.admin-table tr:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+.admin-table td img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+button {
+    padding: 8px 14px;
+    margin-right: 5px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+button.edit {
+    background: #007bff;
+    color: #fff;
+}
+
+button.view {
+    background: #6c757d;
+    color: #fff;
+}
+
+button.delete {
+    background: #e63946;
+    color: #fff;
+}
+
+.status-active {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.status-inactive {
+    color: #dc3545;
+    font-weight: 600;
+}

@@ -1,0 +1,141 @@
+.cart {
+    max-width: 800px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .cart h2 {
+    margin-bottom: 20px;
+  }
+  
+  
+  .cart-img {
+    width: 150px;
+    margin-right: 15px;
+  }
+  
+  .cart-details {
+    flex-grow: 1;
+  }
+  .cart-price{
+    margin-top: 10px;
+    color: #333333;
+  }
+  .cart-name {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 5px;
+    color: rgb(78, 78, 78);
+  }
+  
+  .cart-price {
+    margin-bottom: 10px;
+  }
+  
+  .new-price {
+    color: #e63946;
+    font-weight: bold;
+    margin-right: 8px;
+  }
+  
+  .old-price {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 0.9rem;
+  }
+  
+  .quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #636262;
+  }
+  
+  .quantity button {
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .cart-item {
+    display: flex;
+    position: relative; /* لإمكانية وضع زر الحذف */
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+  }
+  
+  .remove-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: none;
+    border: none;
+    color: #e63946;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  
+  .cart-total {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #4e4e4e;
+  }
+  
+  .checkout-btn {
+    background: #000000;
+    color: #fff;
+    border: none;
+    padding: 14px 18px;
+    margin-top: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .checkout-btn:hover {
+    background: #0056b3;
+  }
+  
+  .color, .size {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    color: #4d4d4d;
+    font-size: 12px;
+    margin-right: 5px;
+  }
+  .cart-stock {
+    font-size: 0.9rem;
+    color: green;
+  }
+  
+  .cart-stock.low-stock {
+    color: red;
+    font-weight: bold;
+  }
+  
+
+  .cart-brand-container {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .brand-name {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #555;               
+    padding: 3px 8px;          
+    font-size: 12px;          
+    border-radius: 12px;      
+    font-weight: 500;       
+  }
+  

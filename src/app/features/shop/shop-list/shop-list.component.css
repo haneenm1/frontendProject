@@ -100,3 +100,21 @@
   }
   
 
+
+  .cart-icons {
+    display: flex;
+    gap: 15px; 
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .cart-icons i {
+    color: #555; 
+    transition: color 0.3s, transform 0.2s; 
+  }
+  
+  .cart-icons i:hover {
+    color: #ff6b6b; 
+    transform: scale(1.2); 
+  }
+  
