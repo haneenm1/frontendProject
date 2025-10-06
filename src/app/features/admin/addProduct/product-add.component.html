@@ -1,0 +1,95 @@
+<div class="admin-container">
+  <h2>Add New Product</h2>
+
+
+  <div class="form-group">
+    <label>Product Name</label>
+    <input type="text" [(ngModel)]="product.name" required>
+  </div>
+
+
+  <div class="form-group">
+    <label>Brand</label>
+    <select [(ngModel)]="product.brand" required>
+      <option value="" disabled selected>Select Brand</option>
+      <option *ngFor="let brand of brands">{{ brand }}</option>
+    </select>
+  </div>
+
+ 
+  <div class="form-group">
+    <label>Category</label>
+    <select [(ngModel)]="product.category" required>
+      <option value="" disabled selected>Select Category</option>
+      <option *ngFor="let cat of categories">{{ cat }}</option>
+    </select>
+  </div>
+
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Price ($)</label>
+      <input type="number" [(ngModel)]="product.price" required>
+    </div>
+
+    <div class="form-group">
+      <label>Discounted Price ($)</label>
+      <input type="number" [(ngModel)]="product.discountedPrice">
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label>Stock</label>
+    <input type="number" [(ngModel)]="product.stock" required>
+  </div>
+
+ 
+  <div class="form-group">
+    <label>Status</label>
+    <select [(ngModel)]="product.status">
+      <option *ngFor="let status of statuses" [value]="status">
+        {{ status | titlecase }}
+      </option>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <label>Available Colors</label>
+    <div class="options">
+      <button 
+        *ngFor="let color of availableColors"
+        type="button"
+        [class.selected]="product.colors.includes(color)"
+        (click)="toggleColor(color)">
+        {{ color }}
+      </button>
+    </div>
+  </div>
+
+ 
+  <div class="form-group">
+    <label>Available Sizes</label>
+    <div class="options">
+      <button 
+        *ngFor="let size of availableSizes"
+        type="button"
+        [class.selected]="product.sizes.includes(size)"
+        (click)="toggleSize(size)">
+        {{ size }}
+      </button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Product Image</label>
+    <input type="file" (change)="onFileSelected($event)">
+  </div>
+
+
+  <div class="actions">
+    <button (click)="saveProduct()">Save Product</button>
+    <button class="cancel" (click)="goToManagement()">Manage Products</button>
+  </div>
+</div>

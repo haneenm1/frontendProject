@@ -1,0 +1,60 @@
+<div *ngIf="visible">
+    <div class="modal-overlay" (click)="close.emit()"></div>
+    <div class="modal">
+      <div class="modal-header">
+        <button class="close-btn" (click)="close.emit()">&times;</button>
+      </div>
+  
+      <div class="modal-body">
+        <div>
+          <img [src]="product?.image" class="modal-image" />
+        </div>
+  
+        <div>
+          <p class="product-name">{{ product?.name }}</p>
+  
+          <div class="modal-price">
+            <span *ngIf="product?.discountedPrice" class="new-price">${{ product.discountedPrice }}</span>
+            <span *ngIf="product?.discountedPrice" class="old-price">${{ product.price }}</span>
+            <span *ngIf="!product?.discountedPrice">${{ product?.price }}</span>
+          </div>
+  
+          <div class="Brand">{{ product?.brand }} brand</div>
+  
+        
+          <div class="product-color">
+            <p>Color:</p>
+            <div class="color-options">
+              <button
+                *ngFor="let color of product?.colors"
+                [class.selected]="selectedColor === color"
+                (click)="selectColor(color)"
+              >
+                {{ color }}
+              </button>
+            </div>
+          </div>
+  
+       
+          <div class="product-attributes">
+            <p>Sizes:</p>
+            <div class="size-options">
+              <button
+                *ngFor="let size of product?.sizes"
+                [class.selected]="selectedSize === size"
+                (click)="selectSize(size)">
+                {{ size }}
+              </button>
+            </div>
+          </div>
+  
+         <p>{{ product?.name }}</p>
+          <div class="addto">
+            <button class="add-to-cart">Add to cart</button>
+            <div class="add-to-wishlist"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

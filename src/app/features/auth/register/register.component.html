@@ -1,0 +1,77 @@
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+<div class="background-image" [style.background-image]="'url(assets/images/background.png)'"></div>
+
+
+<div class=" register-card">
+  <div class="auth-form">
+
+
+    <div class="store-header">
+      <div class="store-header-top">
+        <img src="assets/icons/store-icon.png" alt="Store Icon" class="store-icon" />
+        <h1 class="store-name">StyleNest</h1>
+      </div>
+      <h1 class="store-login">CREATE ACCOUNT</h1>
+      <p>Sign up to start your shopping journey!</p>
+    </div>
+
+  
+    <form (ngSubmit)="register()">
+
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" [(ngModel)]="name" name="name" placeholder="Full Name" required />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" [(ngModel)]="email" name="email" placeholder="Email Address" required />
+        </div>
+      </div>
+
+     
+      <div class="form-row">
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" [(ngModel)]="password" name="password" placeholder="**********" required />
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="text" [(ngModel)]="phone" name="phone" placeholder="Phone Number" required />
+        </div>
+      </div>
+
+    
+      <div class="address-list">
+        <div class="address-container" *ngFor="let address of addresses; let i = index">
+          <h4>Address {{i + 1}}</h4>
+          <div class="form-row">
+            <input type="text" placeholder="Street" [(ngModel)]="address.street" name="street{{i}}" required />
+            <input type="text" placeholder="City" [(ngModel)]="address.city" name="city{{i}}" required />
+          </div>
+          <div class="form-row">
+            <input type="text" placeholder="State" [(ngModel)]="address.state" name="state{{i}}" required />
+            <input type="text" placeholder="Postal Code" [(ngModel)]="address.postal_code" name="postal_code{{i}}" required />
+          </div>
+          <div class="form-row">
+            <input type="text" placeholder="Country" [(ngModel)]="address.country" name="country{{i}}" required />
+            <label class="default-checkbox">
+              <input type="checkbox" [(ngModel)]="address.isDefault" name="isDefault{{i}}" /> Default
+            </label>
+          </div>
+          <button type="button" class="remove-address" (click)="removeAddress(i)" *ngIf="addresses.length > 1">Remove</button>
+        </div>
+      </div>
+
+      <button type="button" class="add-address" (click)="addAddress()">Add Another Address</button>
+      <button type="submit" class="submit-btn">Register</button>
+    </form>
+
+
+    <p class="login-link">Already have an account? <a routerLink="/auth/login">Login</a></p>
+  </div>
+</div>

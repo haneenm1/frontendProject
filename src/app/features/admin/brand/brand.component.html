@@ -1,0 +1,20 @@
+<div class="modal-backdrop">
+    <div class="modal-content">
+      <h2>Manage Brands</h2>
+  
+      <div class="form">
+        <input [(ngModel)]="newBrand" placeholder="Enter new brand" />
+        <button (click)="addBrand()">Add</button>
+      </div>
+  
+      <ul>
+        <li *ngFor="let b of brands">
+          {{ b }}
+          <button (click)="deleteBrand(b)">❌</button>
+        </li>
+      </ul>
+  
+      <button class="close-btn" (click)="close.emit()">Close</button>
+    </div>
+  </div>
+  
