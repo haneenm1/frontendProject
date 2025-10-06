@@ -1,0 +1,36 @@
+<navbar></navbar>
+<div class="wishlist">
+  <h2>Your Wishlist</h2>
+
+  <div *ngIf="wishlistItems.length > 0; else emptyWishlist">
+    <div class="wishlist-item" *ngFor="let item of wishlistItems">
+      <img [src]="'assets/images/' + getImage(item) || 'default.png'" alt="{{ item.product.name }}" class="wishlist-img" />
+
+      <div class="wishlist-details">
+        <p class="wishlist-name">{{ item.product.name }}</p>
+
+        <div class="wishlist-price">
+          <span *ngIf="item.product.discountedPrice && item.product.discountedPrice !== item.product.price" class="new-price">
+            ${{ item.product.discountedPrice }}
+          </span>
+          <span *ngIf="item.product.discountedPrice && item.product.discountedPrice !== item.product.price" class="old-price">
+            ${{ item.product.price }}
+          </span>
+          <span *ngIf="!item.product.discountedPrice || item.product.discountedPrice === item.product.price">
+            ${{ item.product.price }}
+          </span>
+        </div>
+
+        <div class="wishlist-actions">
+          <button (click)="removeItem(item)" class="remove-btn">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #emptyWishlist>
+    <p>Your wishlist is empty.</p>
+  </ng-template>
+</div>

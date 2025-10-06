@@ -10,7 +10,7 @@ import { ProfileComponent } from './features/profile/profile.component';
 import { AddProductComponent } from './features/admin/addProduct/product-add.component';
 import { ProductManagementComponent } from './features/admin/manageProduct/product-management.component';
 import { ManageUsersComponent } from './features/admin/manageUsers/manage-users.component';
-import { DashboardComponent } from './features/admin/dashborad/dashboard.component';
+import { AdminDashboardComponent } from './features/admin/dashborad/dashboard.component';
 import { BrandComponent } from './features/admin/brand/brand.component';
 
 export const routes: Routes = [
@@ -25,7 +25,7 @@ export const routes: Routes = [
    {path: 'admin/addproduct', component:AddProductComponent},
    {path: 'admin/manageproduct', component:ProductManagementComponent},
    {path: 'admin/manageuser', component:ManageUsersComponent},
-   {path: 'admin/dashborad', component:DashboardComponent},
+   {path: 'admin/dashborad', component:AdminDashboardComponent},
    {path: 'admin/brand', component:BrandComponent},
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: '**', redirectTo: 'auth/login' }

@@ -1,20 +1,28 @@
 <div class="modal-backdrop">
-    <div class="modal-content">
-      <h2>Manage Categories</h2>
-  
-      <div class="form">
-        <input [(ngModel)]="newCategory" placeholder="Enter new category" />
-        <button (click)="addCategory()">Add</button>
-      </div>
-  
-      <ul>
-        <li *ngFor="let c of categories">
-          {{ c }}
-          <button (click)="deleteCategory(c)">❌</button>
-        </li>
-      </ul>
-  
-      <button class="close-btn" (click)="close.emit()">Close</button>
+  <div class="modal-content">
+    <h2>Manage Categories</h2>
+
+    <div class="form">
+      <input [(ngModel)]="newCategory" placeholder="Enter new category" />
+      <button (click)="addCategory()">Add</button>
     </div>
+
+    <ul>
+      <li *ngFor="let cat of categories; let i = index">
+        <ng-container *ngIf="editIndex === i; else showCategory">
+          <input [(ngModel)]="editCategoryName" />
+          <button (click)="saveEdit(i)">Save</button>
+          <button (click)="cancelEdit()"> Cancel</button>
+        </ng-container>
+
+        <ng-template #showCategory>
+          {{ cat.name }}
+          <button (click)="startEdit(i)">Edit</button>
+          <button (click)="deleteCategory(cat)">Delete</button>
+        </ng-template>
+      </li>
+    </ul>
+
+    <button class="close-btn" (click)="close.emit()">Close</button>
   </div>
-  
+</div>

@@ -1,0 +1,59 @@
+<navbar></navbar>
+
+<div class="profile">
+    <h2>My Profile</h2>
+  
+    <!-- Profile Info -->
+    <div class="profile-card">
+      <h3>Personal Information</h3>
+  
+      <div *ngIf="!editingProfile">
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Phone:</strong> {{ user.phone }}</p>
+        <button (click)="toggleProfileEdit()">Edit</button>
+      </div>
+  
+      <div *ngIf="editingProfile">
+        <label>Name: <input [(ngModel)]="user.name"></label>
+        <label>Email: <input [(ngModel)]="user.email"></label>
+        <label>Phone: <input [(ngModel)]="user.phone"></label>
+  
+        <div class="actions">
+          <button (click)="saveProfile()">Save</button>
+          <button class="cancel" (click)="toggleProfileEdit()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Addresses -->
+    <div class="profile-card">
+      <h3>Addresses</h3>
+  
+      <div *ngIf="!editingAddress">
+        <div *ngFor="let addr of addresses" class="address-box">
+          <p>{{ addr.street }}, {{ addr.city }}, {{ addr.state }}</p>
+          <p>{{ addr.country }} - {{ addr.postalCode }}</p>
+          <p *ngIf="addr.isDefault" class="default-label">Default</p>
+          <button (click)="setDefault(addr)" *ngIf="!addr.isDefault">Set as Default</button>
+        </div>
+        <button (click)="toggleAddressEdit()">Edit Addresses</button>
+      </div>
+  
+      <div *ngIf="editingAddress">
+        <div *ngFor="let addr of addresses; let i = index" class="address-edit">
+          <label>Street: <input [(ngModel)]="addr.street"></label>
+          <label>City: <input [(ngModel)]="addr.city"></label>
+          <label>State: <input [(ngModel)]="addr.state"></label>
+          <label>Postal Code: <input [(ngModel)]="addr.postalCode"></label>
+          <label>Country: <input [(ngModel)]="addr.country"></label>
+        </div>
+  
+        <div class="actions">
+          <button (click)="saveAddress()">Save</button>
+          <button class="cancel" (click)="toggleAddressEdit()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

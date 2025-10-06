@@ -1,0 +1,55 @@
+<navbar></navbar>
+<div class="cart">
+  <h2>Your Cart</h2>
+
+  <div *ngIf="cartItems.length > 0; else emptyCart">
+    <div class="cart-item" *ngFor="let item of cartItems">
+      <img [src]="'assets/images/' + getImage(item) || 'default.png'" alt="{{ item.product.name }}" class="cart-img" />
+      
+  
+  <div class="cart-details">
+    <p class="cart-name">{{ item.product.name }}</p>
+ 
+
+    <div class="cart-brand-container">
+      <span  class="brand-name">{{ getBrandName(item) }}</span>
+    </div>
+  
+    <div class="cart-selected">
+      <span class="color" *ngIf="item.selectedColor">Color: {{ item.selectedColor }}</span>
+      <span class="size" *ngIf="item.selectedSize">Size: {{ item.selectedSize }}</span>
+    </div>
+
+    <div class="cart-price">
+      <span *ngIf="item.product.discountedPrice" class="new-price">${{ item.product.discountedPrice }}</span>
+      <span *ngIf="item.product.discountedPrice" class="old-price">${{ item.product.price }}</span>
+      <span *ngIf="!item.product.discountedPrice">${{ item.product.price }}</span>
+    </div>
+
+    <p class="cart-stock" [class.low-stock]="item.product.stock <= 10">
+      {{ getStockMessage(item) }}
+    </p>
+
+
+        <div class="quantity">
+          <button (click)="decreaseQty(item)">-</button>
+          <span>{{ item.quantity }}</span>
+          <button (click)="increaseQty(item)">+</button>
+        </div>
+      </div>
+
+      <button class="remove-btn" (click)="removeItem(item)">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    </div>
+
+    <div class="cart-total">
+      <p>Total: <strong>${{ total.toFixed(2) }}</strong></p>
+      <button class="checkout-btn" (click)="goToCheckout()">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <p>Your cart is empty.</p>
+  </ng-template>
+</div>

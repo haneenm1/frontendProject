@@ -1,5 +1,7 @@
-import { Component, ElementRef, HostListener, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProductService, Category } from '../../../core/services/product.services'; 
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-category',
@@ -9,19 +11,17 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit, AfterViewInit {
-  categories = [
-    'Clothing', 'Shoes', 'Accessories', 'Electronics', 'Watches',
-    'Bags', 'Beauty', 'Sports', 'Home', 'Kids', 'Toys', 'Books'
-  ];
+  @Output() categorySelected = new EventEmitter<number>();
 
-  visibleCategories: string[] = [];
-  hiddenCategories: string[] = [];
+  categories: Category[] = [];
+  visibleCategories: Category[] = [];
+  hiddenCategories: Category[] = [];
   showDropdown = false;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef, private productService: ProductService) {}
 
   ngOnInit() {
-    this.updateVisibleCategories();
+    this.loadCategories();
   }
 
   ngAfterViewInit() {
@@ -33,15 +33,28 @@ export class CategoryComponent implements OnInit, AfterViewInit {
     this.updateVisibleCategories();
   }
 
+  loadCategories() {
+    this.productService.getAllCategories()
+      .subscribe(categories => {
+        this.categories = categories;
+        this.updateVisibleCategories();
+      });
+  }
+
   updateVisibleCategories() {
+    if (!this.el.nativeElement.querySelector('.category-list')) return;
     const containerWidth = this.el.nativeElement.querySelector('.category-list').offsetWidth;
     const buttonWidth = 100;
-    const maxVisible = Math.floor(containerWidth / buttonWidth) - 1; 
+    const maxVisible = Math.floor(containerWidth / buttonWidth) - 1;
     this.visibleCategories = this.categories.slice(0, maxVisible);
     this.hiddenCategories = this.categories.slice(maxVisible);
   }
 
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
+  }
+
+  selectCategory(categoryId: number) {
+    this.categorySelected.emit(categoryId);
   }
 }

@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Brand, ProductService } from '../../../core/services/product.services';
 
 @Component({
   selector: 'brand-modal',
@@ -10,22 +11,51 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['brand.component.css']
 })
 export class BrandComponent {
-  @Input() brands: string[] = [];
-  @Output() brandsChange = new EventEmitter<string[]>();
+  brands: Brand[] = [];
+  newBrand = '';
+  editIndex: number | null = null;
+  editBrandName = '';
   @Output() close = new EventEmitter<void>();
 
-  newBrand = '';
-
-  addBrand() {
-    if (this.newBrand.trim()) {
-      this.brands.push(this.newBrand);
-      this.brandsChange.emit(this.brands);
-      this.newBrand = '';
-    }
+  constructor(private productService: ProductService) {
+    this.loadBrands();
   }
 
-  deleteBrand(b: string) {
-    this.brands = this.brands.filter(x => x !== b);
-    this.brandsChange.emit(this.brands);
+  loadBrands() {
+    this.productService.getAllBrands().subscribe(b => this.brands = b);
+  }
+
+  addBrand() {
+    if (!this.newBrand.trim()) return;
+    this.productService.addBrand(this.newBrand).subscribe(brand => {
+      this.brands.push(brand);
+      this.newBrand = '';
+    });
+  }
+
+  deleteBrand(brand: Brand) {
+    this.productService.deleteBrand(brand.brand_id).subscribe(() => {
+      this.brands = this.brands.filter(b => b.brand_id !== brand.brand_id);
+    });
+  }
+
+  startEdit(index: number) {
+    this.editIndex = index;
+    this.editBrandName = this.brands[index].name;
+  }
+
+  saveEdit(index: number) {
+    const brand = this.brands[index];
+    if (!this.editBrandName.trim()) return;
+    this.productService.updateBrand(brand.brand_id, this.editBrandName).subscribe(updated => {
+      this.brands[index] = updated;
+      this.editIndex = null;
+      this.editBrandName = '';
+    });
+  }
+
+  cancelEdit() {
+    this.editIndex = null;
+    this.editBrandName = '';
   }
 }

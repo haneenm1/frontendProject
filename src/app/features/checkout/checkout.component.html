@@ -1,0 +1,92 @@
+<navbar></navbar>
+<div class="checkout">
+  <h2>Checkout</h2>
+
+  <div class="steps">
+    <span [class.active]="step === 1">1. Info</span>
+    <span [class.active]="step === 2">2. Shipping</span>
+    <span [class.active]="step === 3">3. Payment</span>
+    <span [class.active]="step === 4">4. Review</span>
+  </div>
+
+  <!-- Step 1: Customer Info -->
+  <div *ngIf="step === 1">
+    <h3>Customer Information</h3>
+    <label>Name: <input [(ngModel)]="userInfo.name"></label>
+    <label>Email: <input [(ngModel)]="userInfo.email"></label>
+    <label>Phone: <input [(ngModel)]="userInfo.phone"></label>
+  </div>
+
+  <!-- Step 2: Shipping -->
+  <div *ngIf="step === 2">
+    <h3>Shipping Method</h3>
+    <label>
+      <input type="radio" [(ngModel)]="shippingMethod" value="STANDARD" (change)="shippingCost=5"> Standard ($5)
+    </label>
+    <label>
+      <input type="radio" [(ngModel)]="shippingMethod" value="EXPRESS" (change)="shippingCost=10"> Express ($10)
+    </label>
+
+    <h3>Address</h3>
+    <label>
+      <input type="checkbox" [(ngModel)]="address.useDefault"> Use default address
+    </label>
+
+    <div *ngIf="!address.useDefault">
+      <label>Street: <input [(ngModel)]="address.street"></label>
+      <label>City: <input [(ngModel)]="address.city"></label>
+      <label>State: <input [(ngModel)]="address.state"></label>
+      <label>Postal: <input [(ngModel)]="address.postal"></label>
+    </div>
+  </div>
+
+  <!-- Step 3: Payment -->
+  <div *ngIf="step === 3">
+    <h3>Payment Method</h3>
+    <label><input type="radio" [(ngModel)]="paymentMethod" value="CASH"> Cash on Delivery</label>
+    <label><input type="radio" [(ngModel)]="paymentMethod" value="CARD"> Credit Card</label>
+
+    <div *ngIf="paymentMethod === 'CARD'">
+      <label>Card Number: <input [(ngModel)]="card.number"></label>
+      <label>Expiry: <input [(ngModel)]="card.expiry"></label>
+      <label>CVV: <input [(ngModel)]="card.cvv"></label>
+    </div>
+  </div>
+
+  <!-- Step 4: Review -->
+  <div *ngIf="step === 4">
+    <div class="summary">
+      <h4>Order Summary</h4>
+      <div *ngFor="let item of cartItems" class="summary-item">
+        <div class="summary-details">
+          <p class="summary-name">{{ item.name }}</p>
+          <p class="summary-price">
+            <span *ngIf="item.discountedPrice" class="new-price">${{ item.discountedPrice }}</span>
+            <span *ngIf="item.discountedPrice" class="old-price">${{ item.price }}</span>
+            <span *ngIf="!item.discountedPrice">${{ item.price }}</span>
+            x{{ item.quantity }}
+          </p>
+        </div>
+      </div>
+
+      <div class="summary-totals">
+        <p><span>Subtotal:</span> <span>${{ subtotal.toFixed(2) }}</span></p>
+        <p><span>Discount:</span> <span>- ${{ discountValue.toFixed(2) }}</span></p>
+        <p><span>Shipping:</span> <span>${{ shippingCost.toFixed(2) }}</span></p>
+        <p class="summary-total"><span>Total:</span> <span>${{ total.toFixed(2) }}</span></p>
+      </div>
+
+      <div class="coupon">
+        <input placeholder="Coupon Code" [(ngModel)]="coupon">
+        <button (click)="applyCoupon()">Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="actions">
+    <button (click)="prevStep()" [disabled]="step===1">Back</button>
+    <button *ngIf="step<4" (click)="nextStep()">Next</button>
+    <button *ngIf="step===4" (click)="placeOrder()">Place Order</button>
+  </div>
+</div>

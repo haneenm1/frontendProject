@@ -25,7 +25,6 @@ export class LoginComponent {
             const payload = JSON.parse(atob(res.token.split('.')[1]));
             const role = payload.role;
   
-    
             if (role === 'ADMIN'|| role === "admin") {
               this.router.navigate(['/admin/dashboard']);
             } else if (role === 'CUSTOMER'|| role === 'customer') {

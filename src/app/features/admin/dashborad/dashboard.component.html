@@ -1,0 +1,100 @@
+<div class="admin-dashboard">
+  <header class="admin-header">
+    <div class="logo"><img src="assets/icons/store-icon.png">StyleNest</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search..." />
+      <button></button>
+    </div>
+  </header>
+
+  <div class="dashboard-body">
+    <aside class="sidebar">
+      <ul>
+        <li><i class="fa-solid fa-user"></i> Profile</li>
+        <li routerLink="/admin/products"><i class="fa-solid fa-box"></i> Products</li>
+        <li routerLink="/admin/orders"><i class="fa-solid fa-cart-shopping"></i> Orders</li>
+        <li routerLink="/admin/users"><i class="fa-solid fa-users"></i> Users</li>
+        <li routerLink="/admin/reports"><i class="fa-solid fa-chart-line"></i> Reports</li>
+        <li><i class="fa-solid fa-ticket-alt"></i> Coupons</li>
+        <li><i class="fa-solid fa-copyright"></i> Brand</li>
+        <li><i class="fa-solid fa-tags"></i> Category</li>
+        <li class="sign-out"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <div class="cards">
+        <div class="card">
+          <h3>Total Products</h3>
+          <p>{{ stats.totalProducts }}</p>
+        </div>
+        <div class="card">
+          <h3>Total Orders</h3>
+          <p>{{ stats.totalOrders }}</p>
+        </div>
+        <div class="card">
+          <h3>Active Users</h3>
+          <p>{{ stats.activeUsers }}</p>
+        </div>
+        <div class="card">
+          <h3>Revenue</h3>
+          <p>${{ stats.revenue }}</p>
+        </div>
+        <div class="card">
+          <h3>count Low Stock Products</h3>
+          <p>{{ stats.countLowStockProducts }}</p>
+        </div>
+        <div class="card">
+          <h3>count Active Coupons</h3>
+          <p>{{ stats.countActiveCoupons }}</p>
+        </div>
+      </div>
+
+      <h2>Recent Orders</h2>
+      <table class="recent-orders">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>User</th>
+            <th>Total</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of stats.recentOrders">
+            <td>#{{ order.id }}</td>
+            <td>{{ order.userName }}</td>
+            <td>${{ order.total }}</td>
+            <td>
+              <span class="badge" [ngClass]="getBadgeClass(order.status)">
+                {{ order.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      
+<h2>Orders by Status</h2>
+<table class="recent-orders">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let o of stats.ordersByStatus">
+      <td>{{ o.status }}</td>
+      <td>{{ o.count }}</td>
+    </tr>
+  </tbody>
+</table>
+
+    </main>
+  </div>
+  
+
+
+
+
